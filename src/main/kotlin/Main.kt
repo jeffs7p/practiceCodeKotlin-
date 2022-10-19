@@ -5,7 +5,46 @@ fun main(args: Array<String>) {
     //isAnagrama("amor", "romA")
     //Reto número 2
     //fibonacci()
-    serieNumerosPrimos()
+    //serieNumerosPrimos()
+    areaPoligono()
+}
+fun areaPoligono () {
+    val datos = readLine()?.split(" ")?.map { it }?.toMutableList()
+    val sonNumeros = mutableListOf<Boolean>()
+    var numOk = false
+    var tipoPoligono = ""
+
+    // Se comprueba que los datos ingresados son números
+    if (datos != null) {
+        for (i in datos) {
+            val comprobacion = isNumber(i)
+            sonNumeros.add(comprobacion)
+        }
+    }
+    if (!sonNumeros.contains(false)) { numOk = true}
+
+    // Se comprueba tipo de polígono
+    if (datos?.size == 2) {
+        println("1: Triángulo   2: Rectángulo")
+        val datoIngresado = readLine()?.toInt()
+        if (datoIngresado == 1) {
+            tipoPoligono = "Triángulo"
+        } else if (datoIngresado == 2) {
+            tipoPoligono = "Rectángulo"
+        } else {
+            tipoPoligono = "ninguno"
+        }
+    }
+
+    // Resultados
+    when {
+        datos.isNullOrEmpty() -> println("No existen datos")
+        !numOk -> println("Ingrese números")
+        datos.size == 1 -> println("El área del cuadrado es: ${ areaCuadrado(datos) }")
+        tipoPoligono == "Triángulo" -> println("El área del triángulo es: ${ areaTriangulo(datos)}")
+        tipoPoligono == "Rectángulo" -> println("El área del rectángulo es: ${ areaRectangulo(datos)}")
+        tipoPoligono == "ninguno" -> println("No se seleccionó tipo de polígono")
+    }
 }
 fun serieNumerosPrimos () {
     (1..100).forEach {
@@ -83,3 +122,4 @@ fun fizzBuzz () {
         }
     }
 }
+
