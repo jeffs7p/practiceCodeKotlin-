@@ -4,13 +4,40 @@ fun main(args: Array<String>) {
     //Reto número 1
     //isAnagrama("amor", "romA")
     //Reto número 2
-    fibonacci()
+    //fibonacci()
+    serieNumerosPrimos()
 
-    println()
-    val list = listOf(89, 144, 233, 377, 610, 987, 1597)
-    println(list.sortedDescending())
+
+
+
 
 }
+fun serieNumerosPrimos () {
+    (1..100).forEach {
+        val result = esNumeroPrimo(it)
+        if (result) {
+            print("$it, ")
+        }
+    }
+}
+fun esNumeroPrimo (valor: Int): Boolean {
+    var count = 0
+    var comprobacion = false
+    if (valor < 2) {
+        comprobacion = true
+    }
+    for (i in 2..100) {
+        if (valor % i == 0) {
+            count += 1
+        }
+    }
+    if (count == 1) {
+        comprobacion = true
+    }
+    //println(comprobacion)
+    return comprobacion
+}
+
 fun fibonacci () {
     var numA: Long = 0
     var numB: Long = 1
