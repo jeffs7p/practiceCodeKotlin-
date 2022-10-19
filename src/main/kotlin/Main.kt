@@ -6,11 +6,6 @@ fun main(args: Array<String>) {
     //Reto número 2
     //fibonacci()
     serieNumerosPrimos()
-
-
-
-
-
 }
 fun serieNumerosPrimos () {
     (1..100).forEach {
