@@ -6,7 +6,16 @@ fun main(args: Array<String>) {
     //Reto número 2
     //fibonacci()
     //serieNumerosPrimos()
-    areaPoligono()
+    //areaPoligono()
+    invirtiendoCadenas()
+}
+/* Invierta el orden de una cadena de texto sin usar funciones propias del lenguaje */
+fun invirtiendoCadenas () {
+    val text = readLine()!!.toCharArray()
+    val size = text.size - 1
+    for (i in size downTo 0) {
+        print(text[i])
+    }
 }
 fun areaPoligono () {
     val datos = readLine()?.split(" ")?.map { it }?.toMutableList()
