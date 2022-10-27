@@ -7,8 +7,33 @@ fun main(args: Array<String>) {
     //fibonacci()
     //serieNumerosPrimos()
     //areaPoligono()
-    invirtiendoCadenas()
+    //invirtiendoCadenas()
+    contandoPalabras()
 }
+/* Enunciado: Crea un programa que cuente cuantas veces se repite cada palabra y que muestre el recuento final de todas ellas.
+ - Los signos de puntuación no forman parte de la palabra.
+ - Una palabra es la misma aunque aparezca en mayúsculas y minúsculas.
+ - No se pueden utilizar funciones propias del lenguaje que lo resuelvan automáticamente.*/
+fun contandoPalabras () {
+    val input = readLine()!!.split(" ").map { it }.toMutableList()
+    val regexInput = Regex("""[a-zA-z]+""")
+    val mapPalabras = mutableMapOf<String, Int>()
+
+    input.forEach {
+        val palabra = regexInput.find(it)!!.value.lowercase()
+
+        if (!mapPalabras.containsKey(palabra)) {
+            mapPalabras.put(palabra, 1)
+        } else {
+            val num = mapPalabras.get(palabra)!! + 1
+            mapPalabras.replace(palabra, num)
+        }
+    }
+    mapPalabras.forEach { palabra ->
+        println("${palabra.key}: se ha repetido ${palabra.value} ${if(palabra.value == 1) "vez" else "veces"}")
+    }
+}
+
 /* Invierta el orden de una cadena de texto sin usar funciones propias del lenguaje */
 fun invirtiendoCadenas () {
     val text = readLine()!!.toCharArray()
@@ -63,24 +88,6 @@ fun serieNumerosPrimos () {
         }
     }
 }
-fun esNumeroPrimo (valor: Int): Boolean {
-    var count = 0
-    var comprobacion = false
-    if (valor < 2) {
-        comprobacion = true
-    }
-    for (i in 2..100) {
-        if (valor % i == 0) {
-            count += 1
-        }
-    }
-    if (count == 1) {
-        comprobacion = true
-    }
-    //println(comprobacion)
-    return comprobacion
-}
-
 fun fibonacci () {
     var numA: Long = 0
     var numB: Long = 1
