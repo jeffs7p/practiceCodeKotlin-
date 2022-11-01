@@ -1,14 +1,42 @@
+import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.math.pow
+
 fun main(args: Array<String>) {
     //Reto número 0
-    //fizzBuzz()
-    //Reto número 1
+    //fizzBuzz(200)
     //isAnagrama("amor", "romA")
-    //Reto número 2
     //fibonacci()
     //serieNumerosPrimos()
     //areaPoligono()
     //invirtiendoCadenas()
-    contandoPalabras()
+    //contandoPalabras()
+    decimalAbinario()
+}
+/*Enunciado: Crea un programa se encargue de transformar un número decimal a binario sin utilizar funciones propias
+ del lenguaje que lo hagan directamente.*/
+fun decimalAbinario () {
+    println("Ingrese un número:")
+    val num = readLine()!!
+
+    if (isNumber(num) && num.toInt() != 0) {
+        var valorInicial = num.toBigDecimal()
+        var cociente: BigDecimal
+        var resto: BigDecimal
+        val numBinario = mutableListOf<Int>()
+        while (valorInicial != BigDecimal.ONE) {
+            resto = valorInicial % BigDecimal.valueOf(2)
+            valorInicial -= resto
+            cociente = valorInicial.divide(BigDecimal(2), 0, RoundingMode.DOWN)
+            valorInicial -= cociente
+            numBinario.add(resto.toInt())
+        }
+        numBinario.add(1)
+        println(numBinario.reversed().joinToString(""))
+
+    } else {
+        println("Ingrese un numero válido")
+    }
 }
 /* Enunciado: Crea un programa que cuente cuantas veces se repite cada palabra y que muestre el recuento final de todas ellas.
  - Los signos de puntuación no forman parte de la palabra.
@@ -106,35 +134,21 @@ fun isAnagrama (palabra1: String, palabra2: String ): Boolean {
     println(resultado)
     return resultado
 }
-fun fizzBuzz () {
-    println("Mi respuesta")
-    val number = 1..100
+fun fizzBuzz (n: Int) {
+    val number = 1..n
     val regex = Regex("""\d+\.[1-9]+""")
+    val li = 200
 
-    for (i in number) {
-        val multiploTres = i.toDouble() / 3
-        val multiploCinco = i.toDouble() / 5
-        when {
-            !regex.matches(multiploTres.toString()) && !regex.matches(multiploCinco.toString()) -> println("fizzbuzz")
-            !regex.matches(multiploTres.toString()) && regex.matches(multiploCinco.toString()) -> println("fizz")
-            regex.matches(multiploTres.toString()) && !regex.matches(multiploCinco.toString()) -> println("buzz")
-            else -> println(i)
-        }
-    }
-    println()
-    println()
-    println("Resultado")
-    for (index in 1..100) {
-        val divisibleByThree = index % 3 == 0
-        val divisibleByFive = index % 5 == 0
-        if (divisibleByThree && divisibleByFive) {
-            println("fizzbuzz")
-        } else if (divisibleByThree) {
-            println("fizz")
-        } else if (divisibleByFive) {
-            println("buzz")
-        } else {
-            println(index)
+    if (n > 0 && n <= li) {
+        for (i in number) {
+            val multiploTres = i.toDouble() / 3
+            val multiploCinco = i.toDouble() / 5
+            when {
+                !regex.matches(multiploTres.toString()) && !regex.matches(multiploCinco.toString()) -> println("Fizzbuzz")
+                !regex.matches(multiploTres.toString()) && regex.matches(multiploCinco.toString()) -> println("Fizz")
+                regex.matches(multiploTres.toString()) && !regex.matches(multiploCinco.toString()) -> println("Buzz")
+                else -> println(i)
+            }
         }
     }
 }
