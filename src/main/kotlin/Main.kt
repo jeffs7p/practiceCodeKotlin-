@@ -1,6 +1,5 @@
 import java.math.BigDecimal
 import java.math.RoundingMode
-import kotlin.math.pow
 
 fun main(args: Array<String>) {
     //Reto número 0
@@ -11,7 +10,89 @@ fun main(args: Array<String>) {
     //areaPoligono()
     //invirtiendoCadenas()
     //contandoPalabras()
-    decimalAbinario()
+    //decimalAbinario()
+    //recorrerCeros()
+    //recorrerPrimeraLetraMasAy()
+    expresionesEquilibradas()
+}
+/* Enunciado: Crea un programa que comprueba si los paréntesis, llaves y corchetes de una
+expresión están equilibrados. */
+fun expresionesEquilibradas ()  {
+    /* FORMA 1
+    println("Ingrese la expresión: ")
+    val listInput = readLine()!!.replace(" ", "")
+    val expresiones = mapOf("{" to "}", "[" to "]", "(" to ")")
+    val listaComprobacion = mutableListOf<String>()
+    var result = true
+
+    listInput.forEach {
+        val simbolo = it.toString()
+        val contieneKey = expresiones.containsKey(simbolo)
+        val contieneValue = expresiones.containsValue(simbolo)
+
+        if (contieneKey || contieneValue) {
+            if (contieneKey) {
+                listaComprobacion.add(simbolo)
+            /* Si la lista se queda vacia o el simbolo es cualquiera de  { [ ( el resultado es falso, en esta
+            linea se suprimen los sinbolos de listaComprobacion */
+            } else if (listaComprobacion.isEmpty() || simbolo != expresiones[listaComprobacion.removeLast()]) {
+                result = false
+            }
+        }
+    }
+    println(result)
+    */
+    // FORMA 2
+    println("Ingrese la expresión: ")
+    val listInput = readLine()!!.replace(" ", "")
+    val regexOperacion = Regex("""[a-z+-\/*\^0-9]""")
+    var listExpresion = regexOperacion.replace(listInput, "")
+    val regexExpresion = Regex("""(\(\))|(\[\])|(\{\})""")
+
+    while (regexExpresion.containsMatchIn(listExpresion)) {
+        listExpresion = listExpresion.replace(regexExpresion, "")
+    }
+
+    if (listExpresion.isEmpty()) {
+        println("true")
+    } else {
+        println("false")
+    }
+}
+
+/* Mover la primera letra al final y agregar un ay en cada palabra */
+fun recorrerPrimeraLetraMasAy () {
+    println("Ingrese lista: ")
+    val listInput = readLine()!!.split(" ").map { it }.toMutableList()
+    val listFinal = mutableListOf<String>()
+
+    listInput.forEach { palabra ->
+        if (palabra != "!" && palabra != "¡" && palabra != "¿" && palabra != "?" ) {
+            val size = palabra.length - 1
+            val nuevaPalabra = "${palabra.slice(1..size)}${palabra[0]}ay"
+            listFinal.add(nuevaPalabra)
+        } else {
+            listFinal.add(palabra)
+        }
+    }
+    println(listFinal.joinToString(" "))
+}
+/* Recorrer los 0 al final, preservando el orden de los demás elementos */
+fun recorrerCeros () {
+    println("Ingrese lista: ")
+    val listInput = readLine()!!.split(" ").map { it }.toMutableList()
+    val listFinal = mutableListOf<String>()
+    val listCeros = mutableListOf<String>()
+
+    for (elemento in listInput) {
+        if (elemento == "0") {
+            listCeros.add(elemento)
+        } else {
+            listFinal.add(elemento)
+        }
+    }
+    listFinal.addAll(listCeros)
+    println(listFinal)
 }
 /*Enunciado: Crea un programa se encargue de transformar un número decimal a binario sin utilizar funciones propias
  del lenguaje que lo hagan directamente.*/
