@@ -1,8 +1,8 @@
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.text.Normalizer
 
 fun main(args: Array<String>) {
-    //Reto número 0
     //fizzBuzz(200)
     //isAnagrama("amor", "romA")
     //fibonacci()
@@ -13,7 +13,54 @@ fun main(args: Array<String>) {
     //decimalAbinario()
     //recorrerCeros()
     //recorrerPrimeraLetraMasAy()
-    expresionesEquilibradas()
+    //expresionesEquilibradas()
+    //eliminandoCaracteres()
+    esUnPolindromo()
+}
+/* Enunciado: Escribe una función que reciba un texto y retorne verdadero o falso (Boolean)
+según sean o no palíndromos.
+ Un Palíndromo es una palabra o expresión que es igual si se lee de izquierda a derecha que de derecha a izquierda.
+ NO se tienen en cuenta los espacios, signos de puntuación y tildes.
+ Ejemplo: Ana lleva al oso la avellana. */
+fun esUnPolindromo () {
+    println("Ingrese las palabras: ")
+    var input1 = readLine()!!.lowercase()
+    val regexSignos = Regex("""[ .,!¡¿?:;]""")
+
+    input1 = input1.replace(regexSignos, "")
+    // Transforma las letras con signos extras como la tilde en la tetra base Ejm: Á = a
+    input1 = Normalizer.normalize(input1, Normalizer.Form.NFD).replace("\\p{Mn}+".toRegex(), "")
+    val reverso = input1.reversed()
+
+    if (input1 == reverso) {
+        println(true)
+    } else {
+        println(false)
+    }
+}
+/*  * Enunciado: Crea una función que reciba dos cadenas como parámetro (str1, str2) e imprima otras dos
+cadenas como salida (out1, out2).
+ out1 contendrá todos los caracteres presentes en la str1 pero NO estén presentes en str2.
+ out2 contendrá todos los caracteres presentes en la str2 pero NO estén presentes en str1. */
+fun eliminandoCaracteres () {
+    println("Ingrese palabras 1: ")
+    val input1 = readLine()
+    println("Ingrese palabras 2: ")
+    val input2 = readLine()
+    var out1 = ""
+    var out2 = ""
+    input1!!.forEach {
+        if (!input2!!.contains(it)) {
+            out1 += it
+        }
+    }
+    input2!!.forEach {
+        if (!input1!!.contains(it)) {
+            out2 += it
+        }
+    }
+    println("out1 " + out1)
+    println("out2 " + out2)
 }
 /* Enunciado: Crea un programa que comprueba si los paréntesis, llaves y corchetes de una
 expresión están equilibrados. */
