@@ -1,6 +1,10 @@
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.Normalizer
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 fun main(args: Array<String>) {
@@ -18,8 +22,34 @@ fun main(args: Array<String>) {
     //eliminandoCaracteres()
    // esUnPolindromo()
     //factorialNumero()
-    numeroAmstrong()
-
+    //numeroAmstrong()
+    calcularDias()
+}
+/*
+Enunciado: Crea una función que calcule y retorne cuántos días hay entre dos cadenas de texto que representen fechas.
+ - Una cadena de texto que representa una fecha tiene el formato "dd/MM/yyyy".
+ - La función recibirá dos String y retornará un Int.
+ - La diferencia en días será absoluta (no importa el orden de las fechas).
+ - Si una de las dos cadenas de texto no representa una fecha correcta se lanzará una excepción.
+*/
+fun calcularDias (){
+    println("Ingrese la fecha 1 (20-01-2022)")
+    val fecha1 = readLine()!!
+    println("Ingrese la fecha 2 (20-01-2022)")
+    val fecha2 = readLine()!!
+    try {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val date1 = dateFormat.parse(fecha1)
+        val date2 = dateFormat.parse(fecha2)
+        val diferenciaFechas = date1?.time!! - date2?.time!!
+        val segundos: Long = diferenciaFechas / 1000
+        val minutos: Long = segundos / 60
+        val horas: Long = minutos / 60
+        val dias: Long = horas / 24
+        println("${dias.absoluteValue} días.")
+    } catch (e:Exception) {
+        println("Ingrese la fecha de forma adecuada")
+    }
 }
 /* Enunciado: Escribe una función que calcule si un número dado es un número de
 Amstrong (o también llamado narcisista). */
