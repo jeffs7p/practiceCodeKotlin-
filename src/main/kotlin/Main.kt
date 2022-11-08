@@ -1,6 +1,7 @@
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.Normalizer
+import kotlin.math.pow
 
 fun main(args: Array<String>) {
     //fizzBuzz(200)
@@ -15,7 +16,58 @@ fun main(args: Array<String>) {
     //recorrerPrimeraLetraMasAy()
     //expresionesEquilibradas()
     //eliminandoCaracteres()
-    esUnPolindromo()
+   // esUnPolindromo()
+    //factorialNumero()
+    numeroAmstrong()
+
+}
+/* Enunciado: Escribe una función que calcule si un número dado es un número de
+Amstrong (o también llamado narcisista). */
+fun numeroAmstrong () {
+    println("Ingrese un número: ")
+    val input1 = readLine()
+    var resultado = 0.0
+
+    if (isNumber(input1.toString()) && input1!!.toInt() >= 0) {
+        val listNum = mutableListOf<Int>()
+        val size = input1.length
+        for (i in input1) {
+            listNum.add(i.toString().toInt())
+        }
+        listNum.forEach {
+            resultado += it.toDouble().pow(size)
+        }
+        if (input1.toDouble() == resultado) {
+            println("true")
+        } else {
+            println("false")
+        }
+    } else {
+        println("Ingrese un número válido.")
+    }
+}
+/* Enunciado: Escribe una función que calcule y retorne el factorial de un número dado. */
+fun factorialNumero () {
+    println("Ingrese un número: ")
+    val input1 = readLine().toString()
+    var resultado = 1
+    var valor = 1
+    if (isNumber(input1)) {
+        val num = input1.toInt()
+        when {
+            num < 0 -> println("No tiene factorial")
+            num <= 1 -> println("1")
+            else -> {
+                for (i in 1 until num) {
+                    valor += 1
+                    resultado *= valor
+                }
+                println(resultado)
+            }
+        }
+    } else {
+        println("Ingrese un número válido.")
+    }
 }
 /* Enunciado: Escribe una función que reciba un texto y retorne verdadero o falso (Boolean)
 según sean o no palíndromos.
