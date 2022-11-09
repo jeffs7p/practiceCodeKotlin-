@@ -3,7 +3,6 @@ import java.math.RoundingMode
 import java.text.Normalizer
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
@@ -23,7 +22,26 @@ fun main(args: Array<String>) {
    // esUnPolindromo()
     //factorialNumero()
     //numeroAmstrong()
-    calcularDias()
+    //calcularDias()
+    mayusculaPrimeraLetra()
+}
+/*
+Enunciado: Crea una función que reciba un String de cualquier tipo y se encargue de
+poner en mayúscula la primera letra de cada palabra.
+- No se pueden utilizar operaciones del lenguaje que lo resuelvan directamente.
+*/
+fun  mayusculaPrimeraLetra () {
+    println("Ingrese la oración: ")
+    val text = readLine()!!
+    var textMayuscula = text
+    val regexSignos = Regex("""[ .,!¡¿?:;]""")
+    val textSinSignos =  text.replace(regexSignos, " ")
+
+    // A textMayuscula que es igual al texto inicial se le remplaza la palabra proporcionada por textSinSignos
+    textSinSignos.split(" ").forEach { word ->
+        textMayuscula = textMayuscula.replace(word, word.replaceFirstChar { it.uppercase() })
+    }
+    println(textMayuscula)
 }
 /*
 Enunciado: Crea una función que calcule y retorne cuántos días hay entre dos cadenas de texto que representen fechas.
