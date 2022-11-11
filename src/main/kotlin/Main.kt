@@ -23,7 +23,44 @@ fun main(args: Array<String>) {
     //factorialNumero()
     //numeroAmstrong()
     //calcularDias()
-    mayusculaPrimeraLetra()
+    //mayusculaPrimeraLetra()
+    separacionElementos()
+}
+/*
+ Enunciado: Crea una función que reciba dos array, un booleano y retorne un array.
+ - Si el booleano es verdadero buscará y retornará los elementos comunes de los dos array.
+ - Si el booleano es falso buscará y retornará los elementos no comunes de los dos array.
+ - No se pueden utilizar operaciones del lenguaje que lo resuelvan directamente.
+*/
+fun separacionElementos () {
+    println("Ingrese elementos del conjunto 1 separados por un espacio: ")
+    val elementos1 = readLine()!!.split(" ").map { it }.toMutableList()
+    println("Ingrese elementos del conjunto 2 separados por un espacio: ")
+    val elementos2 = readLine()!!.split(" ").map { it }.toMutableList()
+    println("Ingrese true o false: ")
+    val comunes = readLine()!!
+    val elementosSeleccionados = mutableSetOf<String>()
+    val elementosNoSeleccionados = mutableSetOf<String>()
+
+    elementos1.forEach {
+        if (elementos2.contains(it) && comunes == "true") {
+            elementosSeleccionados.add(it)
+        } else if (!elementos2.contains(it) && comunes == "false") {
+            elementosNoSeleccionados.add(it)
+        }
+    }
+    elementos2.forEach {
+        if (elementos1.contains(it) && comunes == "true") {
+            elementosSeleccionados.add(it)
+        } else if (!elementos1.contains(it) && comunes == "false") {
+            elementosNoSeleccionados.add(it)
+        }
+    }
+    when (comunes) {
+        "true" -> println("Elementos comunes: $elementosSeleccionados")
+        "false" -> println("Elementos no comunes: $elementosNoSeleccionados")
+        else -> println("Debe ingresar datos válidos")
+    }
 }
 /*
 Enunciado: Crea una función que reciba un String de cualquier tipo y se encargue de
