@@ -24,7 +24,56 @@ fun main(args: Array<String>) {
     //numeroAmstrong()
     //calcularDias()
     //mayusculaPrimeraLetra()
-    separacionElementos()
+    //separacionElementos()
+    carreraObstaculos()
+}
+/*
+Enunciado: Crea una función que evalúe si un/a atleta ha superado correctamente una
+carrera de obstáculos.
+- La función recibirá dos parámetros:
+- Un array que sólo puede contener String con las palabras "run" o "jump"
+- Un String que represente la pista y sólo puede contener "_" (suelo) o "|" (valla)
+- La función imprimirá cómo ha finalizado la carrera:
+- Si el/a atleta hace "run" en "_" (suelo) y "jump" en "|" (valla) será correcto y no
+variará el símbolo de esa parte de la pista.
+- Si hace "jump" en "_" (suelo), se variará la pista por "x".
+- Si hace "run" en "|" (valla), se variará la pista por "/".
+- La función retornará una frase que indique si ha superado la carrera.
+Para ello tiene que realizar la opción correcta en cada tramo de la pista.
+*/
+fun carreraObstaculos () {
+    println("Ingrese RUN o JUMP separados de un espacio:")
+    val datos1 = readLine()!!.split(" ").map { it }.toMutableList()
+    println("Ingrese _ o | separados de un espacio:")
+    val datos2 = readLine()!!.split(" ").map { it }.toMutableList()
+
+    if (datos1.size == datos2.size) {
+        val regexSignos = Regex("""[^\|_]""")
+        var verificarEntrada = true
+
+        // Se intercambia valores por / y X
+        for (i in datos1.indices) {
+            when {
+                datos1[i].lowercase() == "run" && datos2[i] == "|" -> datos2[i] = "/"
+                datos1[i].lowercase() == "jump" && datos2[i] == "_" -> datos2[i] = "X"
+            }
+        }
+        // Se verifica contenido de los datos ingresados
+        datos2.forEach {
+            if (regexSignos.containsMatchIn(it) || datos1.contains("_") || datos1.contains("|")){
+                verificarEntrada = false
+            }
+        }
+        // Se imprime resultado
+        if (!datos2.contains("X") && !datos2.contains("/") && verificarEntrada) {
+            println("Carrera superada.")
+        } else {
+            println("Carrera no superada.")
+        }
+        println(datos2.joinToString(""))
+    } else {
+        println("Ingreso de datos incorrecto.")
+    }
 }
 /*
  Enunciado: Crea una función que reciba dos array, un booleano y retorne un array.
