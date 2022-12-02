@@ -6,6 +6,8 @@ import java.util.*
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
+
+
 fun main(args: Array<String>) {
     //fizzBuzz(200)
     //isAnagrama("amor", "romA")
@@ -25,8 +27,48 @@ fun main(args: Array<String>) {
     //calcularDias()
     //mayusculaPrimeraLetra()
     //separacionElementos()
-    carreraObstaculos()
+    //carreraObstaculos()
+    dibujarTriangulo()
 }
+/*
+Crea un programa que dibuje un triángulo equilátero con asteriscos "*".
+*/
+fun dibujarTriangulo () {
+    val input= readLine()!!
+
+    if (isNumber(input)) {
+        var tamanioPoligono = input.toInt()
+
+        // Se tranforma el tamaño a un numero impar
+        if (tamanioPoligono % 2 == 0) {
+            tamanioPoligono += 1
+        }
+        // Factores para construir el triángulo
+        val centroTriangulo = ((tamanioPoligono - 1) / 2) + 1
+        var numeroSignos = 1
+        var numeroEspacioIzquierda = (tamanioPoligono - 1) / 2
+        var numeroEspacioDerecha = (tamanioPoligono - 1) / 2
+
+        // Construción del triángulo
+        for (i in 1..centroTriangulo) {
+            // Imprimir figura
+            print(" ". repeat(numeroEspacioIzquierda))
+            print("*".repeat(numeroSignos))
+            print(" ". repeat(numeroEspacioDerecha))
+
+            // Salto linea
+            println()
+
+            // Configuración numero de impresiones
+            numeroEspacioIzquierda -= 1
+            numeroEspacioDerecha -= 1
+            numeroSignos += 2
+        }
+    } else {
+        println("Valor no válido")
+    }
+}
+
 /*
 Enunciado: Crea una función que evalúe si un/a atleta ha superado correctamente una
 carrera de obstáculos.
