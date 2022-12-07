@@ -7,7 +7,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 
-
 fun main(args: Array<String>) {
     //fizzBuzz(200)
     //isAnagrama("amor", "romA")
@@ -28,7 +27,52 @@ fun main(args: Array<String>) {
     //mayusculaPrimeraLetra()
     //separacionElementos()
     //carreraObstaculos()
-    dibujarTriangulo()
+    //dibujarTriangulo()
+    esCapicua()
+}
+/*
+Realizar una función que reciba un numero ingresado por el usuario y averigüe si el número es
+capicúa o no (Por ejemplo: 12321). Nota: No podemos
+transformar el numero a cadena para realizar el ejercicio.
+*/
+fun esCapicua () {
+    val input= readLine()!!
+    var count = 0
+
+    if (isNumber(input)) {
+        // Se determina el tamaño del número
+        var numTamanio = input.toInt()
+        while (numTamanio != 0) {
+            count += 1
+            numTamanio = numTamanio.div(10)
+        }
+        // Se obtiene numDecimales para realizar operaciones utilizando count
+        var numInicial = input.toInt()
+        var numDecimales = 1
+        var reversoNumero = 0
+        for (i in 1 until count) {
+            numDecimales *= 10
+        }
+        // Reverso del número
+        while (numDecimales!= 0) {
+            // Se selecciona el último número de numInicial
+            val numIzquierda = numInicial % 10
+            //Se quita el último número a numInicial
+            numInicial = numInicial.div(10)
+            // Se obtiene el reverso del número
+            reversoNumero += (numIzquierda * numDecimales)
+            // Se baja ceros a numDecimales
+            numDecimales = numDecimales.div(10)
+        }
+        // Se imprime resultado
+        if (reversoNumero == input.toInt()) {
+            println("El número ingresado es capicúa")
+        } else {
+            println("El número no es capicúa")
+        }
+    }  else {
+        println("Valor no válido")
+    }
 }
 /*
 Crea un programa que dibuje un triángulo equilátero con asteriscos "*".
