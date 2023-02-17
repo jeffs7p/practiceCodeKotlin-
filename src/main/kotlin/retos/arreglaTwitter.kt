@@ -1,7 +1,6 @@
-package retos.codemder
+package retos
 
 import java.io.File
-import java.nio.charset.Charset
 
 /*
 Reto 1: ¡Arregla Twitter!

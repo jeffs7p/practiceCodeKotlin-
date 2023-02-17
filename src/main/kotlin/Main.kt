@@ -28,12 +28,123 @@ fun main(args: Array<String>) {
     //separacionElementos()
     //carreraObstaculos()
     //dibujarTriangulo()
-    esCapicua()
+    //esCapicua()
+    //verificarStringFinal()
+    esIsograma()
+    //ordenarNumeros()
+
+   // println(sort(arrayListOf(4, 6, 1, 8, 2), true)) // 1, 2, 4, 6, 8
+   // println(sort(arrayListOf(4, 6, 1, 8, 2), false)) // 8, 6, 4, 2, 1
+}
+/*
+Enunciado: Crea una función que ordene y retorne una matriz de números.
+- La función recibirá un listado (por ejemplo [2, 4, 6, 8, 9]) y un parámetro adicional
+  "Asc" o "Desc" para indicar si debe ordenarse de menor a mayor o de mayor a menor.
+- No se pueden utilizar funciones propias del lenguaje que lo resuelvan automáticamente.
+*/
+fun sort(numbers: List<Int>, asc: Boolean): List<Int> {
+
+    val sortedNumbers = mutableListOf<Int>()
+
+    for (number in numbers) {
+
+        var added = false
+
+        println(sortedNumbers.withIndex())
+        for ((index, sortedNumber) in sortedNumbers.withIndex()) {
+
+            if (number > sortedNumber) {
+                sortedNumbers.add(index, number)
+                added = true
+                break
+            }
+        }
+
+        if (!added) {
+            sortedNumbers.add(number)
+        }
+    }
+
+    return sortedNumbers
+}
+
+/*
+Realizar un isograma, que es una palabra que no tiene letras repetidas, se debe ignorar acentos,
+si tiene más de una palabra debe regresar false, si es un string vacio es un isograma
+*/
+fun esIsograma () {
+
+    // FORMA 1
+    val textA = readLine()!!
+    val esIsograma = textA.all { ch -> textA.count { it == ch } == 1 }
+    //println(esIsograma)
+    if (esIsograma && textA.isNotEmpty()) {
+        println("La palabra es un isograma")
+    } else {
+        println("La palabra no es un isograma")
+    }
+
+    /*
+    FORMA 2
+    val textA = readLine()!!
+    val setTextA = textA.toSet()
+    println(textA.length)
+    println(setTextA.size)
+   if (textA.length != setTextA.size && textA.isNotEmpty()) {
+        println("La  palabra no es un isograma")
+    } else {
+        println("La palabra es un isograma")
+    }
+    */
+
+   /*
+   FORMA 3
+   val text = readLine()!!
+    val sizeText = text.length
+    var conteoLetrasRepetidas = 0
+    val textList = text.split(" ").map { it }.toMutableList()
+
+    if (textList.size <= 1){
+        for (i in 0 until sizeText) {
+            val conteo = text.count { it == text[i] }
+            if (conteo > 1) {
+                conteoLetrasRepetidas += 1
+            }
+        }
+        if (conteoLetrasRepetidas > 1) {
+            println("La  palabra no es un isograma")
+        } else {
+            println("La palabra es un isograma")
+        }
+    } else {
+        println(false)
+    }*/
+}
+/*
+Hacer una funcion que reciba dos string y devuelva verdadero si el primero termina
+con el segundo sin utilizar funciones preestablecidas
+*/
+fun verificarStringFinal () {
+    val text1 = readLine()!!
+    val text2 = readLine()!!
+    val sizeText1 = text1.length
+    val sizeText2 = text2.length
+    val diferenciaSize = sizeText1 - sizeText2
+    if (sizeText1 >= sizeText2) {
+        val subStringText1 = text1.substring(diferenciaSize, sizeText1)
+        if (text2 == subStringText1) {
+            println(true)
+        } else {
+            println(false)
+        }
+    } else {
+        println("Datos ingresados no válidos")
+    }
+    //println("Con endsWith ${text1.endsWith(text2)}")
 }
 /*
 Realizar una función que reciba un numero ingresado por el usuario y averigüe si el número es
-capicúa o no (Por ejemplo: 12321). Nota: No podemos
-transformar el numero a cadena para realizar el ejercicio.
+capicúa o no (Por ejemplo: 12321). Nota: No podemos transformar el numero a cadena para realizar el ejercicio.
 */
 fun esCapicua () {
     val input= readLine()!!
